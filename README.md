@@ -2,15 +2,14 @@
 
 A GitHub Action that install [`asdf`] and all runtimes from `.tool-versions`.
 
-It is a wrapper for [`asdf-vm/actions/install`] with a caches for `asdf`
-and optionally for `pnpm`.
+It is a wrapper for [`asdf-vm/actions/install`] with a caches for `asdf`.
 
 [`asdf-vm/actions/install`]: https://github.com/asdf-vm/actions
 [`asdf`]: https://github.com/asdf-vm/asdf
 
 ```yml
       - name: Install tools from asdf config
-        uses: ai/asdf-cache-action@v1
+        uses: codeur/setup-asdf@v1
 ```
 
 ---
@@ -40,9 +39,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
       - name: Install tools from asdf config
-        uses: ai/asdf-cache-action@v1
-      - name: Install dependencies
-        run: pnpm install --ignore-scripts
+        uses: codeur/setup-asdf@v1
       - name: Run tests
         run: pnpm test
 ```
@@ -50,14 +47,15 @@ jobs:
 
 ## Inputs
 
-If you are have jobs with `pnpm install` and `pnpm install --prod` you can use
-`dependencies-cache` input to set different cache for a security reasons:
+You can uses inputs to specify explicitly versions to use. Be careful, for now,
+you must specify both `ruby-version` and `nodejs-version` if you want to use them.
+A `.tool-versions`file is written by action before running `asdf install`.
+
 
 ```yml
       - name: Install tools from asdf config
-        uses: ai/asdf-cache-action@v1
+        uses: codeur/setup-asdf@v1
         with:
-          dependencies-cache: production
-      - name: Install dependencies
-        run: pnpm install --prod --ignore-scripts
+          ruby-version: 3.1
+          nodejs-version: 20
 ```
