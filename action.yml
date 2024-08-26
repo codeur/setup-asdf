@@ -1,9 +1,9 @@
 name: Install tools from asdf config
-description: Install runtimes by asdf CLI with a cache
-author: Andrey Sitnik
+description: Install runtimes and dependencies by asdf CLI with a cache
+author: Andrey Sitnik, Codeur SAS
 branding:
   icon: download
-  color: purple
+  color: blue
 inputs:
   ruby-version:
     description: Ruby version to install

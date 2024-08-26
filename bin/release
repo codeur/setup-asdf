@@ -12,5 +12,6 @@ tags = version.split('.').map.with_index { |_, i| version.split('.').first(i + 1
 tags.each do |tag|
   `git tag -d v#{tag}`
   `git tag v#{tag}`
+  `git push origin :refs/tags/v#{tag}`
 end
 `git push origin --tags`

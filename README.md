@@ -59,3 +59,11 @@ A `.tool-versions`file is written by action before running `asdf install`.
           ruby-version: 3.1
           nodejs-version: 20
 ```
+
+## Release
+
+Update the VERSION file and run `bin/release` to create tags for given version.
+```sh
+echo 1.0.2 > VERSION
+bin/release
+```
