@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+# This is a script to update tags from the VERSION file.
+# Example if VERSION file contains 1.0.0, it will create 3 tags: v1, v1.0, v1.0.0
+# It will also push the tags to the remote repository.
+# If the VERSION file is updated later to 1.0.1, the script will create a new tag v1.0.1 and replace the tags v1 and v1.0 with v1.0.1.
+
+require 'fileutils'
+
+version = File.read('VERSION').strip
+tags = version.split('.').map.with_index { |_, i| version.split('.').first(i + 1).join('.') }
+tags.each do |tag|
+  `git tag -d v#{tag}`
+  `git tag v#{tag}`
+end
+`git push origin --tags`

@@ -57,6 +57,7 @@ runs:
 
     - name: Install gems with bundler
       if: steps.ruby.outputs.detected == 'true'
+      shell: bash
       run: |
         bundle install --jobs 4 --retry 3
 
@@ -70,5 +71,6 @@ runs:
 
     - name: Install nodejs packages with yarn
       if: steps.nodejs.outputs.detected == 'true'
+      shell: bash
       run: |
         yarn install
