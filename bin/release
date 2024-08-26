@@ -8,10 +8,11 @@
 require 'fileutils'
 
 version = File.read('VERSION').strip
-tags = version.split('.').map.with_index { |_, i| version.split('.').first(i + 1).join('.') }
+parts = version.split('.')
+tags = parts.map.with_index { |_, i| 'v' + parts.first(i + 1).join('.') }.reverse
 tags.each do |tag|
-  `git tag -d v#{tag}`
-  `git tag v#{tag}`
-  `git push origin :refs/tags/v#{tag}`
+  `git tag -d #{tag}`
+  `git tag #{tag}`
+  `git push origin :refs/tags/#{tag}`
 end
 `git push origin --tags`
